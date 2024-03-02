@@ -25,9 +25,9 @@ input_size = 30
 sequence_length = 50
 num_layers = 2
 
-train_path = '../../datasets/Spirit5M/chronological_train.csv'
-save_teacher_path = '../../datasets/Spirit5M/model/chronological_teacher.pth'
-save_noKD_path = '../../datasets/Spirit5M/model/chronological_noKD.pth'
+train_path = '../datasets/Spirit5M/chronological_train.csv'
+save_teacher_path = '../datasets/Spirit5M/model/chronological_teacher.pth'
+save_noKD_path = '../datasets/Spirit5M/model/chronological_noKD.pth'
 
 Teacher = DistilLog(input_size, hidden_size, num_layers, num_classes, is_bidirectional=False).to(device)
 noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)

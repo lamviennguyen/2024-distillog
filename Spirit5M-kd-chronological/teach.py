@@ -23,9 +23,9 @@ sequence_length = 50
 num_layers = 1
 hidden_size = 4
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-train_path = ('../../datasets/Spirit5M/chronological_train.csv')
-save_teacher_path = ('../../datasets/Spirit5M/model/chronological_teacher.pth')
-save_student_path = ('../../datasets/Spirit5M/model/chronological_student.pth')
+train_path = ('../datasets/Spirit5M/chronological_train.csv')
+save_teacher_path = ('../datasets/Spirit5M/model/chronological_teacher.pth')
+save_student_path = ('../datasets/Spirit5M/model/chronological_student.pth')
 
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)

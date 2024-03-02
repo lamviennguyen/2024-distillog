@@ -90,7 +90,7 @@ def mod(l, n):
 
 
 def read_data(path, input_size, sequence_length):
-    fi = pd.read_csv('../../datasets/Spirit/pca_vector.csv', header = None)
+    fi = pd.read_csv('../datasets/Spirit/pca_vector.csv', header = None)
     vec = []
     vec = fi
     vec = np.array(vec)

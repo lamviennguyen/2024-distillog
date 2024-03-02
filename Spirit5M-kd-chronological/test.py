@@ -22,12 +22,12 @@ num_layers = 2
 num_classes = 2 
 split = 50
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-save_teacher_path = '../../datasets/Spirit5M/model/chronological_teacher.pth'
-save_student_path = '../../datasets/Spirit5M/model/chronological_student.pth'
-save_noKD_path = '../../datasets/Spirit5M/model/chronological_noKD.pth'
-test_path = '../../datasets/Spirit5M/chronological_test.csv'
+save_teacher_path = '../datasets/Spirit5M/model/chronological_teacher.pth'
+save_student_path = '../datasets/Spirit5M/model/chronological_student.pth'
+save_noKD_path = '../datasets/Spirit5M/model/chronological_noKD.pth'
+test_path = '../datasets/Spirit5M/chronological_test.csv'
 
-fi = pd.read_csv('../../datasets/Spirit/pca_vector.csv', header = None)
+fi = pd.read_csv('../datasets/Spirit/pca_vector.csv', header = None)
 vec = []
 vec = fi
 vec = np.array(vec)
