@@ -143,7 +143,7 @@ def train(model, train_loader, learning_rate, num_epochs):
             data, target = data.to(device), target.to(device)
             
             output, _ = model(data)
-            print(output)
+            #print(output)
             loss = criterion(output, target)
             total_loss += loss.item()
             loss.backward()

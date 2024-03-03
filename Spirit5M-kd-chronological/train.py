@@ -36,7 +36,7 @@ noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_c
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)
 
-Teacher = train(Teacher, train_loader, learning_rate, num_epochs = 5)
+Teacher = train(Teacher, train_loader, learning_rate, num_epochs = 300)
 save_model(Teacher, save_teacher_path)
 
 #noKD = train(noKD, train_loader, learning_rate, num_epochs = 40)

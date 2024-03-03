@@ -94,8 +94,8 @@ def test(model, criterion = nn.CrossEntropyLoss()):
                 
                 predicted = (output < 0.2).astype(int)
                 target = np.array([y.cpu() for y in target])
-                if(target.sum() > 0):
-                  print(output, target)                
+                #if(target.sum() > 0):
+                  #print(output, target)                
 
                 TP += ((predicted == 1) * (target == 1)).sum()
                 FP += ((predicted == 1) * (target == 0)).sum()
