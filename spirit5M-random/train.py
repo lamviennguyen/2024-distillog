@@ -25,9 +25,9 @@ input_size = 30
 sequence_length = 50
 num_layers = 2
 
-train_path = '../datasets/Spirit5M/chronological_train.csv'
-save_teacher_path = '../datasets/Spirit5M/model/chronological_teacher.pth'
-save_noKD_path = '../datasets/Spirit5M/model/chronological_noKD.pth'
+train_path = '../datasets/Spirit5M/random_train.csv'
+save_teacher_path = '../datasets/Spirit5M/model/random_teacher.pth'
+save_noKD_path = '../datasets/Spirit5M/model/random_noKD.pth'
 
 Teacher = DistilLog(input_size, hidden_size, num_layers, num_classes, is_bidirectional=False).to(device)
 noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
@@ -36,7 +36,7 @@ noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_c
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)
 
-Teacher = train(Teacher, train_loader, learning_rate, num_epochs = 200)
+Teacher = train(Teacher, train_loader, learning_rate, num_epochs = 150)
 save_model(Teacher, save_teacher_path)
 
 #noKD = train(noKD, train_loader, learning_rate, num_epochs = 40)

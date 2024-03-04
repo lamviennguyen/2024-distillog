@@ -100,5 +100,5 @@ Teacher = DistilLog(input_size = input_size, hidden_size=128, num_layers = 2, nu
 Student = DistilLog(input_size = input_size, hidden_size=4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
 
 Teacher = load_model(Teacher, save_teacher_path)
-teach(epochs=40, Teacher=Teacher, Student=Student, temp=7, alpha=0.3)
+teach(epochs=100, Teacher=Teacher, Student=Student, temp=7, alpha=0.3)
 save_model(Student, save_student_path)
