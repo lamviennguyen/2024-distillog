@@ -24,8 +24,8 @@ num_layers = 1
 hidden_size = 4
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 train_path = ('../datasets/BGL/chronological_train.csv')
-save_teacher_path = ('../datasets/BGL/model/chronological_teacher.pth')
-save_student_path = ('../datasets/BGL/model/chronological_student.pth')
+save_teacher_path = ('../datasets/BGL/model/chronological_teacher_lstm.pth')
+save_student_path = ('../datasets/BGL/model/chronological_student_lstm.pth')
 
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)

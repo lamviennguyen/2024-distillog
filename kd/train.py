@@ -31,7 +31,7 @@ save_noKD_path = '../datasets/HDFS/model/noKD.pth'
 
 Teacher = DistilLog(input_size, hidden_size, num_layers, num_classes, is_bidirectional=False).to(device)
 noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
-#summary(Teacher, input_size=(50, 50, 30))
+summary(Teacher, input_size=(50, 50, 30))
 
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)

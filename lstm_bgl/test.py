@@ -22,9 +22,9 @@ num_layers = 2
 num_classes = 2 
 split = 50
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-save_teacher_path = '../datasets/BGL/model/chronological_teacher.pth'
-save_student_path = '../datasets/BGL/model/chronological_student.pth'
-save_noKD_path = '../datasets/BGL/model/chronological_noKD.pth'
+save_teacher_path = '../datasets/BGL/model/chronological_teacher_lstm.pth'
+save_student_path = '../datasets/BGL/model/chronological_student_lstm.pth'
+save_noKD_path = '../datasets/BGL/model/chronological_noKD_lstm.pth'
 test_path = '../datasets/BGL/chronological_test.csv'
 
 
@@ -108,19 +108,38 @@ def test(model, criterion = nn.CrossEntropyLoss()):
 
 def main():      
 
-    #teacher = DistilLog(input_size = input_size, hidden_size = 128, num_layers = num_layers, num_classes = num_classes, is_bidirectional=False).to(device)
+    teacher = DistilLog(input_size = input_size, hidden_size = 128, num_layers = num_layers, num_classes = num_classes, is_bidirectional=False).to(device)
     student = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
-    #noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
-    #teacher = load_model(teacher, save_teacher_path)
+    noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
+    teacher = load_model(teacher, save_teacher_path)
     student = load_model(student, save_student_path)
-    #noKD = load_model(noKD, save_noKD_path)
+    noKD = load_model(noKD, save_noKD_path)
 
-    
+    start_time = time()
+    accuracy, test_loss, P, R, F1, TP, FP, TN, FN = test(teacher, criterion = nn.CrossEntropyLoss())
+    test_loss /= (split*sub)
+
+    print('Result of testing teacher model')
+    print('false positive (FP): {}, false negative (FN): {}, true positive (TP): {}, true negative (TN): {}'.format(FP, FN, TP, TN))
+    print(f'Test set: Average loss: {test_loss:.4f}, Accuracy: {accuracy:.2f}%). Total time = {time() - start_time}')
+    print('Precision: {:.3f}%, Recall: {:.3f}%, F1-measure: {:.3f}%' .format(P, R, F1))
+
+
     start_time = time()
     accuracy, test_loss, P, R, F1, TP, FP, TN, FN = test(student, criterion = nn.CrossEntropyLoss())
     test_loss /= (split*sub)
 
     print('Result of testing student model')
+    print('false positive (FP): {}, false negative (FN): {}, true positive (TP): {}, true negative (TN): {}'.format(FP, FN, TP, TN))
+    print(f'Test set: Average loss: {test_loss:.4f}, Accuracy: {accuracy:.2f}%). Total time = {time() - start_time}')
+    print('Precision: {:.3f}%, Recall: {:.3f}%, F1-measure: {:.3f}%' .format(P, R, F1))
+
+
+    start_time = time()
+    accuracy, test_loss, P, R, F1, TP, FP, TN, FN = test(noKD, criterion = nn.CrossEntropyLoss())
+    test_loss /= (split*sub)
+
+    print('Result of testing noKD model')
     print('false positive (FP): {}, false negative (FN): {}, true positive (TP): {}, true negative (TN): {}'.format(FP, FN, TP, TN))
     print(f'Test set: Average loss: {test_loss:.4f}, Accuracy: {accuracy:.2f}%). Total time = {time() - start_time}')
     print('Precision: {:.3f}%, Recall: {:.3f}%, F1-measure: {:.3f}%' .format(P, R, F1))

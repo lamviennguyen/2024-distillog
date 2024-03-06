@@ -22,14 +22,14 @@ hidden_size = 128
 num_layers = 2
 num_classes = 2 
 split = 50
-device = torch.device('cpu')
-save_teacher_path = '../datasets/HDFS/model/teacher.pth'
-save_student_path = '../datasets/HDFS/model/student.pth'
-save_noKD_path = '../datasets/HDFS/model/noKD.pth'
-test_path = '../datasets/HDFS/test.csv'
-save_quantized_path = '../datasets/HDFS/model/quantized_model.pth'
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+save_teacher_path = '../datasets/BGL/model/chronological_teacher.pth'
+save_student_path = '../datasets/BGL/model/chronological_student.pth'
+save_noKD_path = '../datasets/BGL/model/chronological_noKD.pth'
+test_path = '../datasets/BGL/chronological_test.csv'
+#save_quantized_path = '../datasets/BGL/model/quantized_model.pth'
 
-fi = pd.read_csv('../datasets/HDFS/pca_vector.csv', header = None)
+fi = pd.read_csv('../datasets/BGL/pca_vector.csv', header = None)
 vec = []
 vec = fi
 vec = np.array(vec)
