@@ -23,9 +23,9 @@ sequence_length = 50
 num_layers = 1
 hidden_size = 4
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-train_path = ('../datasets/HDFS/train.csv')
-save_teacher_path = ('../datasets/HDFS/model/teacher_lstm.pth')
-save_student_path = ('../datasets/HDFS/model/student_lstm.pth')
+train_path = ('../datasets/BGL/chronological_train.csv')
+save_teacher_path = ('../datasets/BGL/model/tfidf_chronological_teacher.pth')
+save_student_path = ('../datasets/BGL/model/tfidf_chronological_student.pth')
 
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)
@@ -100,5 +100,5 @@ Teacher = DistilLog(input_size = input_size, hidden_size=128, num_layers = 2, nu
 Student = DistilLog(input_size = input_size, hidden_size=4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
 
 Teacher = load_model(Teacher, save_teacher_path)
-teach(epochs=100, Teacher=Teacher, Student=Student, temp=7, alpha=0.3)
+teach(epochs=40, Teacher=Teacher, Student=Student, temp=7, alpha=0.3)
 save_model(Student, save_student_path)
