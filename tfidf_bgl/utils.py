@@ -110,7 +110,7 @@ def read_data(path, input_size, sequence_length):
             if event == 0:
                 vec_pattern.append([-1] * input_size)
             else:
-                vec_pattern.append(vec[event - 1])
+                vec_pattern.append(vec[event - 2])
         logs.append(vec_pattern)
     logs = np.array(logs)
     train_x = logs
