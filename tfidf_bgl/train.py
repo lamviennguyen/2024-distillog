@@ -31,12 +31,12 @@ save_noKD_path = '../datasets/BGL/model/tfidf_chronological_noKD.pth'
 
 Teacher = DistilLog(input_size, hidden_size, num_layers, num_classes, is_bidirectional=False).to(device)
 noKD = DistilLog(input_size = input_size, hidden_size = 4, num_layers = 1, num_classes = num_classes, is_bidirectional=False).to(device)
-#summary(Teacher, input_size=(50, 50, 30))
+#=summary(Teacher, input_size=(50, 50, 30))
 
 train_x, train_y = read_data(train_path, input_size, sequence_length)
 train_loader = load_data(train_x, train_y, batch_size)
 
 Teacher = train(Teacher, train_loader, learning_rate, num_epochs = 200)
-#noKD = train(noKD, train_loader, learning_rate, num_epochs = 300)
+noKD = train(noKD, train_loader, learning_rate, num_epochs = 300)
 save_model(Teacher, save_teacher_path)
-#save_model(noKD, save_noKD_path)
+save_model(noKD, save_noKD_path)

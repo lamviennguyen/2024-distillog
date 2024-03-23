@@ -29,7 +29,7 @@ save_noKD_path = '../datasets/BGL/model/tfidf_chronological_noKD.pth'
 test_path = '../datasets/BGL/chronological_test.csv'
 #save_quantized_path = '../datasets/BGL/model/quantized_model.pth'
 
-fi = pd.read_csv('../datasets/BGL/tfidf_bgl_vector.csv', header = None)
+fi = pd.read_csv('../datasets/BGL/tfidf_bgl_chronological_vector.csv', header = None)
 vec = []
 vec = fi
 vec = np.array(vec)
