@@ -26,7 +26,7 @@ device = torch.device('cuda')
 save_teacher_path = '../datasets/BGL/model/chronological_cnn_teacher.pth'
 save_student_path = '../datasets/BGL/model/chronological_cnn_student.pth'
 save_noKD_path = '../datasets/BGL/model/chronological_cnn_noKD.pth'
-test_path = '../datasets/BGL/test.csv'
+test_path = '../datasets/BGL/chronological_test.csv'
 
 
 fi = pd.read_csv('../datasets/BGL/pca_vector.csv', header = None)
@@ -111,6 +111,7 @@ def main():
 
     teacher = TextCNN(30, 50, 128).to(device)
     student = TextCNN(30, 50, 4).to(device)
+    noKD = TextCNN(30, 50, 4).to(device)
     teacher = load_model(teacher, save_teacher_path)
     student = load_model(student, save_student_path)
     noKD = load_model(noKD, save_noKD_path)
