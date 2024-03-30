@@ -23,10 +23,10 @@ num_layers = 2
 num_classes = 2 
 split = 50
 device = torch.device('cuda')
-save_teacher_path = '../datasets/BGL/model/chronological_cnn_teacher.pth'
-save_student_path = '../datasets/BGL/model/chronological_cnn_student.pth'
-save_noKD_path = '../datasets/BGL/model/chronological_cnn_noKD.pth'
-test_path = '../datasets/BGL/chronological_test.csv'
+save_teacher_path = '../datasets/BGL/model/random_cnn_teacher.pth'
+save_student_path = '../datasets/BGL/model/random_cnn_student.pth'
+save_noKD_path = '../datasets/BGL/model/random_cnn_noKD.pth'
+test_path = '../datasets/BGL/random_test.csv'
 
 
 fi = pd.read_csv('../datasets/BGL/pca_vector.csv', header = None)
