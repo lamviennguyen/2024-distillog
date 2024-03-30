@@ -100,5 +100,5 @@ Teacher = TextCNN(30, 50, 128).to(device)
 Student = TextCNN(30, 50, 4).to(device)
 
 Teacher = load_model(Teacher, save_teacher_path)
-teach(epochs=40, Teacher=Teacher, Student=Student, temp=7, alpha=0.3)
+teach(epochs=100, Teacher=Teacher, Student=Student, temp=7, alpha=0.3)
 save_model(Student, save_student_path)
