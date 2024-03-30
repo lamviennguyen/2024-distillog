@@ -23,13 +23,13 @@ num_layers = 2
 num_classes = 2 
 split = 50
 device = torch.device('cuda')
-save_teacher_path = '../datasets/HDFS/model/cnn_teacher.pth'
-save_student_path = '../datasets/HDFS/model/cnn_student.pth'
-save_noKD_path = '../datasets/HDFS/model/cnn_noKD.pth'
-test_path = '../datasets/HDFS/test.csv'
+save_teacher_path = '../datasets/BGL/model/chronological_cnn_teacher.pth'
+save_student_path = '../datasets/BGL/model/chronological_cnn_student.pth'
+save_noKD_path = '../datasets/BGL/model/chronological_cnn_noKD.pth'
+test_path = '../datasets/BGL/test.csv'
 
 
-fi = pd.read_csv('../datasets/HDFS/pca_vector.csv', header = None)
+fi = pd.read_csv('../datasets/BGL/pca_vector.csv', header = None)
 vec = []
 vec = fi
 vec = np.array(vec)
