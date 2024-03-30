@@ -13,7 +13,7 @@ from tqdm import tqdm
 import csv
 from time import time
 from torch.nn import functional as F
-from attention_layers import LinearAttention
+
 
 device = torch.device('cuda')
 
