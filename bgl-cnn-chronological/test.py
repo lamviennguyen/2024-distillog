@@ -111,6 +111,7 @@ def main():
 
     teacher = TextCNN(30, 50, 128).to(device)
     student = TextCNN(30, 50, 4).to(device)
+    noKD = TextCNN(30, 50, 4).to(device)
     teacher = load_model(teacher, save_teacher_path)
     student = load_model(student, save_student_path)
     noKD = load_model(noKD, save_noKD_path)
