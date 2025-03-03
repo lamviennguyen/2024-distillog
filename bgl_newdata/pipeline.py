@@ -24,7 +24,7 @@ hidden_size = 128
 input_size = 300
 sequence_length = 20
 num_layers = 2
-
+num_epochs = 10
 
 save_teacher_path = '../newdatasets/bgl_20_teacher.pth'
 save_noKD_path = '../newdatasets/bgl_20_noKD.pth'
@@ -38,7 +38,7 @@ def train(model, train_loader, learning_rate):
     model.train()
 
     total_loss = 0
-    for batch_idx, (data, target) in train_loader:
+    for (data, target) in train_loader:
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
         output, _ = model(data)
@@ -48,7 +48,7 @@ def train(model, train_loader, learning_rate):
         loss.backward()
         optimizer.step()
 
-    return model
+    return model, total_loss
 
 def load_data(train_x, train_y, batch_size):
     train_y = train_y.astype(int)
@@ -69,21 +69,26 @@ def start_train(file_path, model):
     with open(file_path, 'rb') as file:
         raw_data = pickle.load(file)
         full_data = raw_data[0] + raw_data[1]
-        full_data = full_data[:-1]
-    
-    for i in range (1):
-        print("epoch: ", i+1)    
+        #full_data = full_data[:-1]
+        full_data = full_data[:1000]
+        total_loss = 0   
         for log, label in process_data_in_chunks(full_data):
             log = np.array(log)
             label = np.array(label)
             data_loader = load_data(log, label, batch_size)
-            model = train(model, data_loader, learning_rate)
-    return model
+            model, loss = train(model, data_loader, learning_rate)
+            total_loss = total_loss+loss
+    return model, total_loss
 
-for file_name in file_names: 
-    file_path = os.path.join(folderpath, file_name) 
-    if os.path.exists(file_path):
-        Teacher = start_train(file_path, Teacher)
+for epoch in range(num_epochs):
+    epoch_loss = 0
+    print('epoch ', epoch + 1)
+    for file_name in file_names: 
+        file_path = os.path.join(folderpath, file_name) 
+        if os.path.exists(file_path):
+            Teacher, loss = start_train(file_path, Teacher)
+        epoch_loss = epoch_loss + loss
+    print('total loss: ', epoch_loss)
     
 save_model(Teacher, save_teacher_path)
 
@@ -94,7 +99,7 @@ with open('../newdatasets/BGL_20l_train_0.8.pkl', 'rb') as file:
     raw_test_data = pickle.load(file)
 
 test_data = raw_test_data[0] + raw_test_data[1]
-test_data = test_data[:-1]
+test_data = test_data[:2000]
 def test(model, criterion = nn.CrossEntropyLoss()):
     model.eval()
     test_loss = 0
